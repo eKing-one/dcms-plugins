@@ -1,4 +1,4 @@
-<?
+<?php
 only_level(3);
 
 if (isset($_GET['act']) && ($_GET['act'] == 'edit' || $_GET['act'] == 'delete')) {
