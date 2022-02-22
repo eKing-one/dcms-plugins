@@ -8,10 +8,10 @@ CREATE TABLE IF NOT EXISTS `apps` (
   `time` int(11) NOT NULL,
   `count` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET  utf8mb4 COLLATE  utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `user_apps` (
   `id_user` int(11) NOT NULL,
   `id_apps` varchar(100) NOT NULL,
   `time` int(11) NOT NULL
-) ENGINE=MyISAM CHARSET  utf8mb4 COLLATE  utf8mb4_unicode_ci AUTO_INCREMENT=1;
+) ENGINE=MyISAM CHARSET utf8mb4 COLLATE utf8mb4_unicode_ci AUTO_INCREMENT=1;

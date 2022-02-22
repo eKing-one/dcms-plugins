@@ -3,40 +3,49 @@ only_level(3);
 
 if (isset($_GET['act']) && ($_GET['act'] == 'edit' || $_GET['act'] == 'delete')) {
 	$ID = (isset($_GET['id_apps']) ? (int) $_GET['id_apps'] : 0);
-	$apps = mysql_fetch_assoc(mysql_query("SELECT * FROM `apps` WHERE `id` = '$ID' LIMIT 1"));
+	$apps = dbassoc(dbquery("SELECT * FROM `apps` WHERE `id` = '$ID' LIMIT 1"));
 }
 
 if (isset($_GET['act']) && $_GET['act'] == 'delete' && isset($_SESSION['sid']) && isset($_GET['sid']) && $_SESSION['sid'] == $_GET['sid'] && isset($apps['id'])) {
-	mysql_query("DELETE FROM `user_apps` WHERE `id_apps` = '$ID'");
-	mysql_query("DELETE FROM `apps` WHERE `id` = '$ID' LIMIT 1");
-	$_SESSION['message'] = __('Приложение успешно удалено');
+	dbquery("DELETE FROM `user_apps` WHERE `id_apps` = '$ID'");
+	dbquery("DELETE FROM `apps` WHERE `id` = '$ID' LIMIT 1");
+	$_SESSION['message'] = '应用程序已成功卸载';
 	header('Location: ?func=admin');
 	exit;
 }
 
-if (isset($_POST['name']) && isset($_POST['url']) && isset($_GET['act'])){
+if (isset($_POST['name']) && isset($_POST['url']) && isset($_GET['act'])) {
 	$name = my_esc($_POST['name']);
 	$opis = my_esc($_POST['opis']);
 	$url = my_esc($_POST['url']);
 	$ic_small = my_esc($_POST['icon_small']);
 	$ic_big = my_esc($_POST['icon_big']);
-	
-	if (strlen2($name) > 128) { $err[] = __('Название слишком длинное'); }
-	elseif (strlen2($name) < 2) { $err[] = __('Короткое название'); }
-	
-	if (strlen2($opis) > 512) { $err[] = __('Описание слишком длинное'); }
-	elseif (strlen2($opis) < 2) { $err[] = __('Короткое описание'); }
-	
-	if (strlen2($url) > 128) { $err[] = __('Ссылка слишком длинная'); }
-	elseif (strlen2($url) < 2) { $err[] = __('Короткая ссылка'); }
-	
-	if (!isset($err)){
-		if ($_GET['act'] == 'add'){
-			mysql_query("INSERT INTO `apps` (`name`, `opis`, `url`, `time`, `icon_small`, `icon_big`) values('$name', '$opis', '$url', '$time', '$ic_small', '$ic_big')");
-			$_SESSION['message'] = __('Новое приложение успешно добавлено');			
+
+	if (strlen2($name) > 128) {
+		$err[] = '标题太长';
+	} elseif (strlen2($name) < 2) {
+		$err[] = '短标题';
+	}
+
+	if (strlen2($opis) > 512) {
+		$err[] = '描述太长';
+	} elseif (strlen2($opis) < 2) {
+		$err[] = '简短的描述';
+	}
+
+	if (strlen2($url) > 128) {
+		$err[] = '链接过长';
+	} elseif (strlen2($url) < 2) {
+		$err[] = '短链路';
+	}
+
+	if (!isset($err)) {
+		if ($_GET['act'] == 'add') {
+			dbquery("INSERT INTO `apps` (`name`, `opis`, `url`, `time`, `icon_small`, `icon_big`) values('$name', '$opis', '$url', '$time', '$ic_small', '$ic_big')");
+			$_SESSION['message'] = '成功添加新应用程序';
 		} elseif (isset($apps['id']) && $_GET['act'] == 'edit') {
-			mysql_query("UPDATE `apps` SET `name` = '$name', `opis` = '$opis', `url` = '$url', `icon_small` = '$ic_small', `icon_big` = '$ic_big' WHERE `id` = '$ID' LIMIT 1");
-			$_SESSION['message'] = __('Изменения успешно приняты');			
+			dbquery("UPDATE `apps` SET `name` = '$name', `opis` = '$opis', `url` = '$url', `icon_small` = '$ic_small', `icon_big` = '$ic_big' WHERE `id` = '$ID' LIMIT 1");
+			$_SESSION['message'] = '已成功接受更改';
 		}
 		header('Location: ?func=admin');
 		exit;
@@ -44,115 +53,106 @@ if (isset($_POST['name']) && isset($_POST['url']) && isset($_GET['act'])){
 }
 
 $_SESSION['sid'] = mt_rand(000, 999);
-$set['title'] = __('Онлайн игры');
+$set['title'] = '网络游戏';
 include_once H . 'sys/inc/thead.php';
 title();
-aut(); 
+aut();
 err();
 
-?>
-<div class="foot"><img src="/style/icons/games.png" alt="*"/> <a href="/plugins/apps/"><?= __('Онлайн игры')?></a> | <a href="?func=admin&amp;act=add"><?= __('Добавить игру')?></a></div>
-<?
+echo '<div class="foot"><img src="/style/icons/games.png" alt="*" /> <a href="/plugins/apps/">网络游戏</a> | <a href="?func=admin&amp;act=add">添加游戏</a></div>';
+
 if (isset($_GET['act'])) {
-	
+
 	if ($_GET['act'] == 'edit') {
-		?>
-		<div class="nav2">
-		<b><?= text($apps['name'])?></b><br />
-		<?= ($apps['icon_big'] ? '<img src="' . text($apps['icon_big']) . '" style="max-width: 200px;" /><br />' : '')?>
-		<?= output_text($apps['opis'])?>
-		</div>
-		
-		<form class="nav2" name="message" action="?func=admin&amp;act=edit&amp;sid=<?= $_SESSION['sid']?>&amp;id_apps=<?= $ID?>" method="post">
-		<?= __('Название')?><br />
-		<input name="name" type="text" value="<?= text($apps['name'])?>" /><br />
 
-		<?= __('URL игры')?><br />
-		<input name="url" type="text" value="<?= text($apps['url'])?>" /><br />
-		
-		<?= __('Описание игры')?><br />	
-		<textarea name="opis" placeholder="<?= __('Опишите основной смысл игры..')?>"><?= text($apps['opis'])?></textarea><br />
-		
-		<?= __('URL маленькой иконки')?><br />
-		<input name="icon_small" type="text" value="<?= text($apps['icon_small'])?>"/><br />
-		
-		<?= __('URL большой иконки')?><br />
-		<input name="icon_big" type="text" value="<?= text($apps['icon_big'])?>" /><br />
-		
-		<input class="submit" type="submit" value="<?= __('Сохранить')?>" /> 
-		</form>
-		<?
+		echo '<div class="nav2">';
+		echo '<b>' . text($apps['name']) . '</b><br />';
+		echo ($apps['icon_big'] ? '<img src="' . text($apps['icon_big']) . '" style="max-width: 200px;" /><br />' : '') . output_text($apps['opis']);
+		echo '</div>';
+
+		echo '<form class="nav2" name="message" action="?func=admin&amp;act=edit&amp;sid=' . $_SESSION['sid'] . '&amp;id_apps=<' . $ID . '" method="post">
+标题<br />
+<input name="name" type="text" value="' . text($apps['name']) . '" /><br />
+
+游戏网址<br />
+<input name="url" type="text" value="' . text($apps['url']) . '" /><br />
+
+游戏描述<br />
+<textarea name="opis" placeholder="描述游戏的基本含义。">' . text($apps['opis']) . '</textarea><br />
+
+小图标的网址<br />
+<input name="icon_small" type="text" value="' . text($apps['icon_small']) . '" /><br />
+
+大图标 URL<br />
+<input name="icon_big" type="text" value="' . text($apps['icon_big']) . '" /><br />
+
+<input class="submit" type="submit" value="保存" />
+</form>';
 	} elseif ($_GET['act'] == 'add') {
-		
-		?>
-		<form class="nav2" name="message" action="?func=admin&amp;act=add&amp;sid=<?= $_SESSION['sid']?>" method="post">
-		<?= __('Название')?><br />
-		<input name="name" type="text" value="" /><br />
 
-		<?= __('URL игры')?><br />
-		<input name="url" type="text" value="" /><br />
-		
-		<?= __('Описание игры')?><br />	
-		<textarea name="opis" placeholder="<?= __('Опишите основной смысл игры..')?>"></textarea><br />
-		
-		<?= __('URL маленькой иконки')?><br />
-		<input name="icon_small" type="text" value=""/><br />
-		
-		<?= __('URL большой иконки')?><br />
-		<input name="icon_big" type="text" value="" /><br />
-		
-		<input class="submit" type="submit" value="<?= __('Добавить')?>" />
-		</form>
-		
-		<div class="mess">
-		<span style="color: blue;"><?= __('Пример добавления игры')?>:</span><br />
-		<span style="color: gray;"><?= __('Название')?>:</span> <span style="color: green;"><?= __('Крестики нолики')?></span><br />
-		<span style="color: gray;"><?= __('URL игры')?>:</span> <span style="color: green;">/plugins/games/xo/</span><br />
-		<span style="color: gray;"><?= __('Описание игры')?>:</span> <span style="color: green;"><?= __('Логическая игра между двумя противниками.')?></span><br />
-		<span style="color: gray;"><?= __('URL маленькой иконки')?>:</span> <span style="color: green;">/style/icons/xo.gif</span><br />
-		<span style="color: gray;"><?= __('URL большой иконки')?>:</span> <span style="color: green;">/style/icons/xo2.gif</span><br />
-		</div>
-		<?
+
+		echo '<form class="nav2" name="message" action="?func=admin&amp;act=add&amp;sid=' . $_SESSION['sid'] . '" method="post">
+标题<br />
+<input name="name" type="text" value="" /><br />
+
+游戏网址<br />
+<input name="url" type="text" value="" /><br />
+
+游戏描述<br />
+<textarea name="opis" placeholder="描述游戏的基本含义.."></textarea><br />
+
+小图标的网址<br />
+<input name="icon_small" type="text" value="" /><br />
+
+大图标 URL<br />
+<input name="icon_big" type="text" value="" /><br />
+
+<input class="submit" type="submit" value="增加" />
+</form>';
+
+		echo '<div class="mess">
+			<span style="color: blue;">添加游戏示例：</span><br />
+			<span style="color: gray;">标题:</span> <span style="color: green;">文字</span><br />
+			<span style="color: gray;">游戏网址:</span> <span style="color: green;">/plugins/games/xo/</span><br />
+			<span style="color: gray;">游戏描述:</span> <span style="color: green;">两个对手之间的逻辑博弈。</span><br />
+			<span style="color: gray;">小图标的网址:</span> <span style="color: green;">/style/icons/xo.gif</span><br />
+			<span style="color: gray;">大图标 URL:</span> <span style="color: green;">/style/icons/xo2.gif</span><br />
+			</div>';
 	}
-	
-	?><div class="foot"><img src="/style/icons/str2.gif" alt="*"/> <a href="/plugins/apps/?func=admin"><?= __('Управление')?></a></div><?
-	
+
+	echo '<div class="foot"><img src="/style/icons/str2.gif" alt="*" /> <a href="/plugins/apps/?func=admin">管理</a></div>';
 } else {
 
-	$k_post = mysql_result(mysql_query("SELECT COUNT(id) FROM `apps`"), 0);
-	$k_page = k_page($k_post,$set['p_str']);
+	$k_post = dbresult(dbquery("SELECT COUNT(id) FROM `apps`"), 0);
+	$k_page = k_page($k_post, $set['p_str']);
 	$page = page($k_page);
 	$start = ($set['p_str'] * $page) - $set['p_str'];
 
-	?><table class="post"><?
+	echo '<table class="post">';
 
-	if ($k_post == 0)
-	{
-		?>
-		<div class="mess">
-		<?= __('В списке нет установленных игр')?>
-		</div>
-		<?
+	if ($k_post == 0) {
+
+		echo '<div class="mess">
+列表中没有安装的游戏
+</div>';
 	}
 
-	$q = mysql_query("SELECT * FROM `apps` ORDER BY `count` DESC LIMIT $start, $set[p_str]");
+	$q = dbquery("SELECT * FROM `apps` ORDER BY `count` DESC LIMIT $start, $set[p_str]");
 
-	while ($apps = mysql_fetch_assoc($q)) {
-		
-		?>
-		<div class="nav2">
-		<a href="?func=admin&amp;id_apps=<?= $apps['id']?>&amp;act=edit"><?= ($apps['icon_small'] ? '<img src="' . text($apps['icon_small']) . '" />' : '')?> <?= text($apps['name'])?></a> [<a href="?func=admin&amp;id_apps=<?= $apps['id']?>&amp;sid=<?= $_SESSION['sid']?>&amp;act=delete"><img src="/style/icons/delete.gif" /> <?= __('удалить')?></a>]
-		</div>
-		<?
+	while ($apps = dbassoc($q)) {
+
+
+		echo '<div class="nav2">
+<a href="?func=admin&amp;id_apps=' . $apps['id'] . '&amp;act=edit">' . ($apps['icon_small'] ? '<img src="' . text($apps['icon_small']) . '" />' : '') . ' ' . text($apps['name']) . '</a> [<a href="?func=admin&amp;id_apps=' . $apps['id'] . '&amp;sid=' . $_SESSION['sid'] . '&amp;act=delete"><img src="/style/icons/delete.gif" /> 删除</a>]
+</div>';
 	}
-	?>
-	</table>
 
-	<?
+	echo '</table>';
+
+
 	if ($k_page > 1) {
 		str('?func=admin&amp;', $k_page, $page);
 	}
-}	
-?>
-<div class="foot"><img src="/style/icons/games.png" alt="*"/> <a href="/plugins/apps/"><?= __('Онлайн игры')?></a> | <b><?= __('Управление')?></b></div>	
-<?
+}
+
+echo '<div class="foot"><img src="/style/icons/games.png" alt="*" /> <a href="/plugins/apps/">网络游戏</a> | <b>管理</b></div>';
