@@ -1,0 +1,6 @@
+Установка гарема:
+в /user/info/ wap?web .php
+прописываем вывод гарема где удобно
+include_once H.'plugins/user_garem/garem.php';
+
+залить таблицы и все.

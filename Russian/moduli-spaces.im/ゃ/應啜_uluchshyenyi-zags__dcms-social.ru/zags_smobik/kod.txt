@@ -1,0 +1,58 @@
+$uid = mysql_fetch_array(mysql_query ("SELECT * FROM zags WHERE user_id='$ank[id]'"));
+$uid1 = mysql_fetch_array(mysql_query ("SELECT * FROM zags WHERE ank_id='$ank[id]'"));if(isset($_GET['obruchit'])){
+mysql_query("INSERT INTO `zags` (`user_id`, `user_nick`, `ank_id`, `ank_nick`) values('.$user[id].', '$user[nick]', '.$ank[id].', '$ank[nick]')");
+$_SESSION['message'] = ('Ваше предложение обручится отправлено, ожидайте ответа');
+$massage = "[b][green]Вам предложение обручится от $user[nick] :[/green][/b] [br][url=/info.php?id=$ank[id]&obruchitok]Принять[/url] | [url=/info.php?id=$ank[id]&obruchitnet]Отказатся[/url]";
+mysql_query("INSERT INTO `mail` (`id_user`, `id_kont`, `msg`, `time`) values('0', '$ank[id]', '$massage','$time')");
+header("Location:info.php?id=$ank[id]");
+}
+if(isset($_GET['obruchitok'])){
+mysql_query("UPDATE `zags` SET `key` = '1' WHERE `user_id` = '$user[id]' OR `ank_id` = '$user[id]' LIMIT 1");
+$_SESSION['message'] = ('Предложение обручится принято');
+$massage = "Ваше предложение обручится на $user[nick] принято";
+mysql_query("INSERT INTO `mail` (`id_user`, `id_kont`, `msg`, `time`) values('0', '$uid1[user_id]', '$massage','$time')");
+header("Location:info.php?id=$ank[id]");}
+if(isset($_GET['obruchitnet'])){
+mysql_query("DELETE FROM `zags` WHERE `ank_id` = '$user[id]' OR `user_id` = '$user[id]'");
+mysql_query("INSERT INTO `mail` (`id_user`, `id_kont`, `msg`, `time`) values('0', '$uid1[user_id]', 'Ваше предложение обручится на  $user[nick] отклонено','$time')");
+$_SESSION['message'] = ('Вы отклонили предложение обручится');
+header("Location:info.php?id=$ank[id]");}
+if(isset($_GET['razvod'])){
+mysql_query("DELETE FROM `zags` WHERE `ank_id` = '$user[id]' OR `user_id` = '$user[id]'");
+$_SESSION['message'] = ('Вы развелись');
+header("Location:info.php?id=$ank[id]");}
+if(isset($_GET['razv'])){
+echo"<div class='main'>Вы действительно хотите развестись с $ank[nick]:<br/> <a href='info.php?id=$ank[id]&razvod'><img src='http://smobik.ru/delacc/ok.gif' alt='*'> Да</a> | <a href='info.php?id=$ank[id]'><img src='http://smobik.ru/delacc/delete.gif' alt='*'> Нет</a></div>";}
+echo"<div class='nav2'>";
+if ($ank['id'] == $uid1['ank_id'] && $uid1['key'] == '1'){
+echo" <img src='http://smobik.ru/moduls.zags/img/love.png' alt='' />";
+echo ($ank['pol'] == 1? 'Женат на ' : 'Замужем за ');
+echo "<a href='info.php?id=$uid1[user_id]'>$uid1[user_nick]</a><br />";
+}else
+if ($ank['id'] == $uid['user_id'] && $uid['key'] == '1'){
+echo" <img src='http://smobik.ru/moduls.zags/img/love.png' alt='' />";
+echo ($ank['pol'] == 1? 'Женат на ' : 'Замужем за ');
+echo "<a href='info.php?id=$uid[ank_id]'>$uid[ank_nick]</a><br />";
+}else{
+$user[pol] == $ank[pol];
+echo" <img src='http://smobik.ru/moduls.zags/img/love.png' alt='' />";
+echo ($ank['pol'] == 1? 'Не женат' : 'Не замужем');}
+echo"</div>";
+Дальше копируем исходный код и вставляем ниже,возле разделов страницы пользователя код:
+$zags = mysql_fetch_array(mysql_query ("SELECT * FROM zags WHERE user_id='$user[id]' OR ank_id='$user[id]'"));
+$zags1 = mysql_fetch_array(mysql_query ("SELECT * FROM zags WHERE user_id='$ank[id]' OR ank_id='$ank[id]'"));
+if (isset($user) && $ank['id']!=$user['id'] && $ank['pol']!=$user['pol']){
+if ($ank['id'] == $uid['user_id'] && $uid['key'] == '1' && $ank['id'] == $zags['user_id'] OR $ank['id'] == $zags['ank_id'] && $user['id'] == $zags1['user_id'] OR $user['id'] == $zags1['ank_id']){
+echo '<div class="nav1"><img src="http://smobik.ru/style/icons/razvod.gif" alt ""> <a href="/info.php?id='.$ank['id'].'&razv">Развестись</a></div>';
+}elseif ($ank['id'] == $uid1['ank_id'] && $uid1['key'] == '1' && $ank['id'] == $zags['user_id'] OR $ank['id'] == $zags['ank_id'] && $user['id'] == $zags1['user_id'] OR $user['id'] == $zags1['ank_id']){
+echo '<div class="nav1"><img src="http://smobik.ru/style/icons/razvod.gif" alt ""> <a href="/info.php?id='.$ank['id'].'&razv">Развестись</a></div>';
+}else
+if ($user[id]!==$zags[user_id] && $user[id]!==$zags[ank_id] && $ank[id]!==$uid[user_id] && $ank[id]!==$uid[ank_id] && $ank[id]!==$uid1[user_id] && $ank[id]!==$uid1[ank_id]){
+if($ank['pol']==0){
+echo '<div class="nav1"><img src="http://smobik.ru/style/icons/meets.gif" alt ""> <a href="/info.php?id='.$ank['id'].'&obruchit">Женится</a></div>';}
+if($ank['pol']==1){
+echo '<div class="nav1"><img src="http://smobik.ru/style/icons/meets.gif" alt ""> <a href="/info.php?id='.$ank['id'].'&obruchit">Выйти замуж</a></div>';
+}
+}
+}
+

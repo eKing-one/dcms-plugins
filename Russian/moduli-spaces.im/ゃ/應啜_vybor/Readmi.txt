@@ -1,0 +1,17 @@
+                                                     --------Запросы------
+ALTER TABLE `user` CHANGE `ank_city` `city` VARCHAR( 32 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ;
+ALTER TABLE `user` ADD `region` VARCHAR( 20 ) NOT NULL AFTER `city` ;
+ALTER TABLE `user` ADD `country` VARCHAR( 20 ) NOT NULL AFTER `city` ;
+
+И залить файл dump.sql
+                                                            ---Конец---
+  
+  
+Как вывести где нибудь информаци??? 
+                                                            
+city($val,true)- только страну...
+city($val,false,true)-только район
+city($val,false,false,true)-только город
+city($val,false)-убирает флаг страны
+city($val,false,true)-показывает ссылки для поиска
+думаю понятно...По умолчанию показывает все параметры

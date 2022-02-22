@@ -1,0 +1,54 @@
+Мод: Журнал операций схожий как на spaces.ru
+
+Автор: Abac250
+
+
+Описание: В журнал юзера заноситься сколько он потратил куда потратил и время также записываеться прибовление это или вычитание..
+
+
+Мод нельзя продавать давать или выкладывать в пабл!
+
+УСТАНОВКА
+1. Залить архив на хостинг
+
+2. Распоковать его ничего стандартного он незаменяет
+
+3. Залить таблицы из файла money.sql
+
+4. Прописать сылку ниже в любом удобном месте
+
+$col=mysql_num_rows(mysql_query("SELECT * FROM `money` WHERE `user`='$user[id]'")); //Журнал операций вывод счетчика
+
+echo "<div class='foot'> - <a href='/pages/oper.php'>Журнал операций</a> (<font color='indigo'><b>$col</b></font>) </div>\n";
+
+5. Вставить запрос каторый находиться ниже там где нужно зделать запись в журнал юзвера
+
+mysql_query("INSERT INTO `money` (`user`, `money`, `mp`, `usl`, `time`) values('$user[id]', '5000', '0', 'Изменение ника', '$time')");
+
+в запросе изменить значения на свои
+
+
+Если надо с установкой помогу писать на Abac250@spaces.ru
+
+
+#ПРИМЕР#
+
+if (isset($_GET['ok']))
+{
+$cena=5000;
+$nick=mysql_real_escape_string($_POST['nick']);
+if (mysql_result(mysql_query("SELECT COUNT(*) FROM `user` WHERE `nick` = '".my_esc($_POST['nick'])."'"),0)!=0)$err[]='Ник "'.stripcslashes(htmlspecialchars($_POST['nick'])).'" уже зарегистрирован';
+if( !preg_match("#^([A-zА-я0-9\-\_\ ])+$#ui", $_POST['nick']))$err[]='В нике присутствуют запрещенные символы';
+if (preg_match("#[a-z]+#ui", $_POST['nick']) && preg_match("#[а-я]+#ui", $_POST['nick']))$err[]='Разрешается использовать символы только русского или только английского алфавита';
+if (preg_match("#(^\ )|(\ $)#ui", $_POST['nick']))$err[]='Запрещено использовать пробел в начале и конце ника';
+if (strlen2($nick)<3)$err[]='Короткий ник';
+if (strlen2($nick)>32)$err[]='Длина ника превышает 32 символа';
+if($user['balls']<$cena)$err[]='не хватает баллов, необходимо '.$cena.' у вас '.$user['balls'].'';
+if(!isset($err)){
+mysql_query("UPDATE `user` SET `nick` = '$nick' WHERE `id` = '$user[id]' LIMIT 1");
+mysql_query("UPDATE `user` SET `balls` = '".($user['balls']-$cena)."' WHERE `id` = '$user[id]' LIMIT 1");
+mysql_query("INSERT INTO `money` (`user`, `money`, `mp`, `usl`, `time`) values('$user[id]', '5000', '0', 'Изменение ника', '$time')");
+msg('Ник успешно изменен');
+header('Location: index.php');
+}
+}

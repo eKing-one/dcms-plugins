@@ -1,0 +1,7 @@
+Распаковать в корень залить таблицы из sql.sqll
+
+код в info.php вставить примерно там где фотоальбомы, файлы гостевая
+
+    $diary = mysql_result(mysql_query("SELECT COUNT(*) FROM `diary` WHERE `id_user` = '" .
+        $ank['id'] . "'"), 0);
+    echo "<img src='diary/img/book.png' alt='' class='icon'/><a href='/diary/user.php?id=$ank[id]'>Дневники</a> ($diary)<br/>";

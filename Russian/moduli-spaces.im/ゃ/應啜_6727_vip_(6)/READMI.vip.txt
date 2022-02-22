@@ -1,0 +1,169 @@
+
+
+###################################################
+#               
+#   Автор: frodo, lovmir.tk   & Wmstart.tk         #
+#   сайт: http://lovmir.tk        #
+#                                                 #
+#   Вы не имеете права продавать, распростронять, #
+#   давать друзьям даный скрипт.                  #
+#                                                 #
+#   Даная версия является платной, и купить         #
+#   можно только у frodo                          #
+###################################################
+Описание !!!
+у каждого юзера появится возможно купить вип премиум которой даст больше возможностей на сайте 
+
+Преимущества VIP Премиум ! 
+ иконка возле ника на выбор из 6 штук 
+услуга лидер сайта 
+услуга оценка +5 
+услуга поднятия рейтинка за страничку +10 
+Ваш мини аватар на главной по очереди меняется с остальными VIP Премиум
+Возможность удалить VIP Премиум абсолютно бесплатно 
+VIP Премиум предоставляется на одну неделю.
+
+Все это действует пока пользователь VIP Премиум 
+
+
+
+
+
+
+
+
+
+
+
+
+########################################################################
+Установка 
+Расоковаем архив в корень не чего стандартного не заменяет 
+
+
+
+вставляем ссылку в user/money/index.php
+В любом месте 
+
+$vip= mysql_result(mysql_query("SELECT COUNT(*) FROM `vip_premimum` WHERE `id_user` = '$user[id]' AND `time` > '$time'"), 0);
+
+
+
+echo '&rarr; <a href="vip.php">VIP Премиум</a> ' . ($vip == 0 ? '<span class="off">[отключон]</span> ' : '<span class="on">[включон]</span>');
+
+########################################################################
+в index.php вставляем 
+#:
+include_once 'vip/vip.php';
+########################################################################
+в /user/info/wap.php
+вставляем первый код
+if (isset($_GET['rating']) && isset($user)  && $user['id']!=$ank['id'] && $user['balls']>=50 && mysql_result(mysql_query("SELECT SUM(`rating`) FROM `user_voice2` WHERE `id_kont` = '".mysql_real_escape_string($user['id'])."'"),0)>=0)
+{
+$my_r=intval(@mysql_result(mysql_query("SELECT `rating` FROM `user_voice2` WHERE `id_user` = '".mysql_real_escape_string($user['id'])."' AND `id_kont` = '".mysql_real_escape_string($ank['id'])."'"),0));
+if ($my_r>'0'){
+msg('Вы уже голосовали');
+}else{
+$new_r=min(max(@intval($_GET['rating']),1),15);
+mysql_query("DELETE FROM `user_voice2` WHERE `id_user` = '".mysql_real_escape_string($user['id'])."' AND `id_kont` = '".mysql_real_escape_string($ank['id'])."' LIMIT 1");
+if ($new_r)
+mysql_query("INSERT INTO `user_voice2` (`rating`, `id_user`, `id_kont`) VALUES ('".mysql_real_escape_string($new_r)."','".mysql_real_escape_string($user['id'])."','".mysql_real_escape_string($ank['id'])."')");
+$ank['rating']=intval(mysql_result(mysql_query("SELECT SUM(`rating`) FROM `user_voice2` WHERE `id_kont` = '".mysql_real_escape_string($ank['id'])."'"),0));
+mysql_query("UPDATE `user` SET `rating` = '".mysql_real_escape_string($ank['rating'])."' WHERE `id` = '".mysql_real_escape_string($ank['id'])."' LIMIT 1");
+if ($new_r==1)
+mysql_query("INSERT INTO `mail` (`id_user`, `id_kont`, `msg`, `time`) values('0', '".mysql_real_escape_string($ank['id'])."', '[url=/info.php?id=$user[id]]$user[nick][/url] Проголосовал(а)! Оценка +1', '".mysql_real_escape_string($time)."')");
+if ($new_r==2)
+mysql_query("INSERT INTO `mail` (`id_user`, `id_kont`, `msg`, `time`) values('0', '".mysql_real_escape_string($ank[id])."', '[url=/info.php?id=$user[id]]$user[nick][/url] Проголосовал(а)! Оценка +2', '".mysql_real_escape_string($time)."')");
+if ($new_r==3)
+mysql_query("INSERT INTO `mail` (`id_user`, `id_kont`, `msg`, `time`) values('0', '".mysql_real_escape_string($ank[id])."', '[url=/info.php?id=$user[id]]$user[nick][/url] Проголосовал(а)! Оценка +3', '".mysql_real_escape_string($time)."')");
+if ($new_r==4)
+mysql_query("INSERT INTO `mail` (`id_user`, `id_kont`, `msg`, `time`) values('0', '".mysql_real_escape_string($ank[id])."', '[url=/info.php?id=$user[id]]$user[nick][/url] Проголосовал(а)! Оценка +4', '".mysql_real_escape_string($time)."')");
+if ($new_r==5)
+mysql_query("INSERT INTO `mail` (`id_user`, `id_kont`, `msg`, `time`) values('0', '".mysql_real_escape_string($ank[id])."', '[url=/info.php?id=$user[id]]$user[nick][/url] Проголосовал(а)! Оценка +5', '".mysql_real_escape_string($time)."')");
+if ($new_r==10)
+mysql_query("INSERT INTO `mail` (`id_user`, `id_kont`, `msg`, `time`) values('0', '".mysql_real_escape_string($ank[id])."', '[url=/info.php?id=$user[id]]$user[nick][/url] Проголосовал(а)! Оценка +10', '".mysql_real_escape_string($time)."')");
+msg('Ваше мнение о пользователе успешно изменено');
+}}
+
+########################################################################
+
+вот второй код в 
+
+
+
+
+
+if (isset($user)  && $user['id']!=$ank['id'] && $user['balls']>=50 && mysql_result(mysql_query("SELECT SUM(`rating`) FROM `user_voice2` WHERE `id_kont` != '".mysql_real_escape_string($user['id'])."'"),0)>=0)
+{
+$my_r=intval(@mysql_result(mysql_query("SELECT `rating` FROM `user_voice2` WHERE `id_user` = '".mysql_real_escape_string($user[id])."' AND `id_kont` = '".mysql_real_escape_string($ank[id])."'"),0));
+echo "\n";
+if ($my_r>'0'){
+if ($my_r==1)
+echo "";
+if ($my_r==2)
+echo "";
+if ($my_r==3)
+echo "";
+if ($my_r==4)
+echo "";
+if ($my_r==5)
+echo "";
+}else{
+
+echo "<div style=''><a href='/info.php?id=$ank[id]&amp;rating=1' title='+1'><img src='style/images/rating/1.png'></a>\n";
+echo "|\n";
+echo "<a href='/info.php?id=$ank[id]&amp;rating=2' title='+2'><img src='style/images/rating/2.png'></a>\n";
+echo "|\n";
+echo "<a href='/info.php?id=$ank[id]&amp;rating=3' title='+3'><img src='style/images/rating/3.png'></a>\n";
+echo "|\n";
+echo "<a href='/info.php?id=$ank[id]&amp;rating=4' title='+4'><img src='style/images/rating/4.png'></a>\n";
+echo "|\n";
+echo "<a href='/info.php?id=$ank[id]&amp;rating=5' title='+5'><img src='style/images/rating/5.png'></a>\n";
+
+
+
+
+
+
+$q = mysql_query("SELECT * FROM `vip_premimum` WHERE `id_user`='".$user['id']."'");
+$f = mysql_fetch_array($q);
+
+
+
+
+
+
+
+
+
+if($f['time']!='')	{
+
+echo "|\n";
+echo "<a href='/info.php?id=$ank[id]&amp;rating=10' title='+10'><img src='style/images/rating/10.png'></a>\n";
+}
+
+echo "</div>\n";
+}
+}
+
+########################################################################
+
+
+#-----------------ТАБЛИЦЫ-----------------------
+CREATE TABLE IF NOT EXISTS `vip_premimum` (
+  `id` int(11) NOT NULL auto_increment,
+  `id_user` int(11) NOT NULL,
+  `nomer` varchar(150) NOT NULL,
+  `time` int(11) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+#-----------------ТАБЛИЦЫ-----------------------
+########################################################################
+
+
+Вывод в любое место методом 
+echo "".vip($ank['id'])."";
+
+
+
+*/

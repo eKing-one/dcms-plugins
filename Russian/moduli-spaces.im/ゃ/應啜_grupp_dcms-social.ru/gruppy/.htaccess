@@ -1,0 +1,4 @@
+DirectoryIndex index.php
+AddDefaultCharset UTF-8
+RewriteEngine On
+RewriteRule ^([0-9]*)/?$ index.php?s=$1 [L,QSA]

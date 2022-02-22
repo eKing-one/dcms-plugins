@@ -1,0 +1,71 @@
+body {
+max-width : 240px;
+margin : 0 auto;
+font-size : 12px;
+font-family : Verdana, Candara, Helvetica, sans-serif;
+color : #333333;
+background-color : #c88d4a;
+margin-top : 10px;
+margin-bottom : 10px;
+}
+a {
+text-decoration : none;
+color : #783bef;
+font-weight : bold;
+}
+a:hover {
+color : #333333;
+font-weight : bold;
+}
+.header {
+margin : 2px;
+padding : 3px;
+vertical-align : middle;
+background-color : #fee89e;
+background-image : url(img/gr.JPG);
+background-attachment : fixed;
+border : 1px solid #c7a222;
+text-align : center;
+}
+.menu {
+margin : 2px;
+padding : 3px;
+vertical-align : middle;
+background-color : #fee89e;
+background-attachment : fixed;
+border : 1px solid #c7a222;
+text-align : left;
+}
+.footer {
+text-align : center;
+margin : 2px;
+padding : 3px;
+vertical-align : middle;
+background-color : #fee89e;
+border : 1px solid #c7a222;
+background-image : url(img/gr.JPG);
+}
+.error {
+background-color : red;
+color : #000000;
+}
+.main {
+background-color : #ffe17b;
+border : 2px solid #946c00;
+margin : 0;
+}
+input, textarea, select {
+color : #000;
+border : 1px solid #ff6600;
+margin : 0 0 1px 0;
+background-color : #ffffff;
+font-size : 11px;
+padding : 1px;
+}
+.hr {
+border-color : #946c00;
+border-style : solid;
+border-width : 1px;
+}
+P.figure {text-align: center;}
+

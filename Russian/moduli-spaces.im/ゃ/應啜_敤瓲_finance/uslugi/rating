@@ -1,0 +1,39 @@
+<?
+echo "<div class=\"trow\">\n";
+echo "<a href=\"index.php\">Финансы</a> &gt; <a href=\"uslugi.php\">Услуги</a> &gt; Рейтинг<br />\n";
+echo "</div>\n";
+
+$ratsun=intval($_GET['rat']);
+$pods=''.$_GET['rat'].'00';
+
+if (isset($_GET['set_ok']))
+{
+if (isset($user) & $user['balls']<=$pods)
+{
+msg ('У Вас не достаточно денег');
+}
+else
+{
+mysql_query("UPDATE `user` SET `rating` = '".($user['rating']+$ratsun)."' WHERE `id` = '$user[id]' LIMIT 1",$db);
+mysql_query("UPDATE `user` SET `balls` = '".($user['balls']-$pods)."' WHERE `id` = '$user[id]' LIMIT 1");
+mysql_query("INSERT INTO `fin_oper` (`user`, `oper`, `time`, `cena`) values('$user[id]', 'Повышение рейтинга на +$ratsun', '$time', '$pods')",$db);
+
+msg ('Рейтинг успешно увеличен');
+}
+}
+if (isset($_GET['set']))
+{
+
+echo "С вашего счета будет снято $_GET[rat]00 Баллов<br />\n";
+echo "<a href='uslugi.php?p=rating&amp;rat=$_GET[rat]&amp;set_ok'>Продолжить</a><br />\n";
+}
+else
+{
+echo "<a href='uslugi.php?p=rating&amp;rat=10&amp;set'>+10</a><br />\n";
+echo "<a href='uslugi.php?p=rating&amp;rat=20&amp;set'>+20</a><br />\n";
+echo "<a href='uslugi.php?p=rating&amp;rat=30&amp;set'>+30</a><br />\n";
+echo "<a href='uslugi.php?p=rating&amp;rat=40&amp;set'>+40</a><br />\n";
+echo "<a href='uslugi.php?p=rating&amp;rat=50&amp;set'>+50</a><br />\n";
+}
+
+?>

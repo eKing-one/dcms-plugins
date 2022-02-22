@@ -1,0 +1,1 @@
+ALTER TABLE  `bot` ADD  `vidnouser` INT( 255 ) NOT NULL DEFAULT  '1'

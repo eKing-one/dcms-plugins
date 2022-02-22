@@ -1,0 +1,89 @@
+body {
+color : #636363;
+font-size : 12px;
+font-family : arial;
+margin : 0;
+background : #f8f8f8;
+}
+a:link, a:active, a:visited {
+color : #ff577e;
+text-decoration : none;
+}
+a:hover, a:focus {
+color : #73b508;
+text-decoration : none;
+}
+img {
+border-style : none;
+}
+.head {
+font-size : 14px;
+font-family : verdana;
+border-bottom : 1px solid #86bd2c;
+padding : 0;
+background : url(images/head.gif) 50% top repeat-x #91d326;
+}
+.head a {
+color : #a9d168;
+font-weight : 700;
+background : url(images/logobg.png) top repeat-x;
+display : inline-table;
+}
+.head span {
+background : url(images/logo.png) left top no-repeat;
+height : 63px;
+display : block;
+}
+.head i {
+font-style : normal;
+background : url(images/logor.png) right top no-repeat;
+height : 37px;
+padding-top : 26px;
+padding-right : 15px;
+padding-left : 20px;
+display : block;
+}
+.head img {
+vertical-align : middle;
+width : 125px;
+height : 63px;
+}
+.head b, .adv a:hover {
+color : #fe83a0;
+}
+.title {
+border-top-left-radius : 8px;
+border-top-right-radius : 8px;
+color : #fff;
+margin : 3px;
+margin-bottom : 0;
+background : url(images/title.gif) 50% top repeat-x #94d62c;
+padding : 7px;
+}
+.main {
+border-bottom-left-radius : 8px;
+border-bottom-right-radius : 8px;
+margin : 3px;
+margin-top : 0;
+border : #dadada solid 1px;
+border-top : 0;
+background : #fff;
+padding : 7px;
+}
+.contur {
+margin : -7px;
+padding-top : 5px;
+padding-bottom : 5px;
+border-bottom : 1px solid #cdcdcd;
+margin-bottom : 5px;
+padding : 7px;
+}
+.foot {
+color : #ffeedb;
+background : url(images/foot.gif) 50% top repeat-x #987144;
+padding : 7px;
+}
+.foot a {
+color : #ffeedb;
+border-bottom : 1px dotted #bd9363;
+}

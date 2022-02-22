@@ -1,0 +1,55 @@
+CREATE TABLE `albums` (
+  `id` int(11) NOT NULL auto_increment,
+  `id_u` int(11) NOT NULL,
+  `name` varchar(32) NOT NULL,
+  `time` int(11) NOT NULL,
+  `pass` varchar(32) NOT NULL,
+  `vid` enum('0','1','2') NOT NULL default '0',
+  `osn` enum('0','1') NOT NULL default '0',
+  `album` int(11) NOT NULL default '0',
+  `put` varchar(250) NOT NULL default '/',
+  `put_os` varchar(250) NOT NULL default '/',
+  PRIMARY KEY  (`id`),
+  KEY `id_u` (`id_u`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+ALTER table `lenta` add `type` varchar(15) default NULL;
+
+CREATE TABLE `albums_foto` (
+  `id` int(11) NOT NULL auto_increment,
+  `id_album` int(11) NOT NULL,
+  `id_u` int(11) default NULL,
+  `name` varchar(64) NOT NULL,
+  `opis` varchar(1024) NOT NULL,
+  `rating` int(11) NOT NULL default '0',
+  `pri` enum('0','1','2') NOT NULL default '0',
+  `avatar` int(1) NOT NULL default '0',
+  `time` int(11) NOT NULL default '0',
+  `eye` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  KEY `id_album` (`id_album`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE `albums_foto_komm` (
+  `id` int(11) NOT NULL auto_increment,
+  `id_picture` int(11) NOT NULL,
+  `id_u` int(11) NOT NULL,
+  `time` int(11) NOT NULL,
+  `msg` varchar(1000) NOT NULL,
+  `otv` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  KEY `id_picture` (`id_picture`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE `albums_foto_rating` (
+  `id_picture` int(11) NOT NULL,
+  `id_u` int(11) NOT NULL,
+  `cn` varchar(11) NOT NULL,
+  KEY `id_picture` (`id_picture`,`id_u`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE `albums_friend` (
+  `id_foto` int(11) NOT NULL,
+  `id_fr` int(11) NOT NULL,
+  KEY `id_picture` (`id_foto`,`id_fr`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;

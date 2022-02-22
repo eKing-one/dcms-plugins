@@ -1,0 +1,1 @@
+ALTER TABLE `user` ADD `music` VARCHAR( 255 ) NOT NULL;

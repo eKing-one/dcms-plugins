@@ -1,0 +1,17 @@
+Закинуть все в корень
+Прописать в style/themes/ваша тема/style.css
+
+.count {
+color: #3b5998;
+padding: 3px;
+float: right;
+border-radius: 3px;
+moz-border-radius: 3px;
+webkit-border-radius: 3px;
+}
+
+Прописать в index.php
+
+include 'sys/inc/last.php';
+
+Если не выходит пишите.

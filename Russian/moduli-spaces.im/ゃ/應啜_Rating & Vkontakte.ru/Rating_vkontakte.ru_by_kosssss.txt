@@ -1,0 +1,44 @@
+﻿Полоска рейтинга vk.com(vkontakte.ru)
+Автор: kosssss
+Цена: 150 wmr(т.к. в магазине комиссия)
+Поддержка: icq- 287766
+Барыгам: узнаю кто ты- посажу на кол)))
+
+
+УСТАНОВКА:
+
+Вставьте в info.php следующий код (для 6.6.4 где хотите, для 6.7.х один фиг будет над аватаркой, так что вставляйте над ней):
+
+P.S.- готовые info.php делать не стал по причине того, что практически у всех они модифицированы.
+
+/////////////////////////////////
+
+if ($ank['rating']>='0' && $ank['rating']<='100'){
+echo '<div style="border-top:1px solid #ccccaa;background-color:#eeeedd;height:17px;width:215px"><div style="background-color:#cccccc;height:17px;width:'.$ank['rating'].'%;"></div><span style="position:relative;top:-15px;left:45%;right:57%;color:#888888;">'.$ank[rating].'%</span></div><br/>';}
+if ($ank['rating']>='101' && $ank['rating']<='200'){
+$z='100';
+$s=$ank['rating'] - $z;
+echo '<div style="border-top:1px solid #ccccaa;background-color:#cccccc;height:17px;width:215px"><div style="background-color:#bbbbbb;height:17px;width:'.$s.'%;"></div><span style="position:relative;top:-15px;left:45%;right:57%;color:#777777;">'.$ank[rating].'%</span></div><br/>';}
+if ($ank['rating']>='201' && $ank['rating']<='300'){
+$z='200';
+$s=$ank['rating'] - $z;
+echo '<div style="border-top:1px solid #999988;background-color:#bbbbbb;height:17px;width:215px"><div style="background-color:#aaaaaa;height:17px;width:'.$s.'%;"></div><span style="position:relative;top:-15px;left:45%;right:57%;color:#666666;">'.$ank[rating].'%</span></div><br/>';}
+if ($ank['rating']>='301' && $ank['rating']<='400'){
+$z='300';
+$s=$ank['rating'] - $z;
+echo '<div style="border-top:1px solid #888877;background-color:#aaaaaa;height:17px;width:215px"><div style="background-color:#999999;height:17px;width:'.$s.'%;"></div><span style="position:relative;top:-15px;left:45%;right:57%;color:#555555;">'.$ank[rating].'%</span></div><br/>';}
+if ($ank['rating']>='401' && $ank['rating']<='500'){
+$z='400';
+$s=$ank['rating'] - $z;
+echo '<div style="border-top:1px solid #777766;background-color:#999999;height:17px;width:215px"><div style="background-color:#888888;height:17px;width:'.$s.'%;"></div><span style="position:relative;top:-15px;left:45%;right:57%;color:#444444;">'.$ank[rating].'%</span></div><br/>';}
+if ($ank['rating']>='501' && $ank['rating']<='600'){
+$z='500';
+$s=$ank['rating'] - $z;
+echo '<div style="border-top:1px solid #666655;background-color:#888888;height:17px;width:215px"><div style="background-color:#777777;height:17px;width:'.$s.'%;"></div><span style="position:relative;top:-15px;left:45%;right:57%;color:#333333;">'.$ank[rating].'%</span></div><br/>';}
+if ($ank['rating']>='601' && $ank['rating']<='700'){
+$z='600';
+$s=$ank['rating'] - $z;
+echo '<div style="border-top:1px solid #555544;background-color:#777777;height:17px;width:215px"><div style="background-color:#666666;height:17px;width:'.$s.'%;"></div><span style="position:relative;top:-15px;left:45%;right:57%;color:#222222;">'.$ank[rating].'%</span></div><br/>';}
+
+
+Всё, скрипт готов к работе))

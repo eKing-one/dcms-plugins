@@ -1,0 +1,10 @@
+php_flag session.use_cookies 0
+php_flag session.use_trans_sid 0
+php_flag magic_quotes_gpc Off
+php_flag expose_php Off
+php_flag display_errors On
+php_flag register_globals Off
+ErrorDocument 404 /index.php
+ErrorDocument 403 /index.php
+php_flag output_buffering On
+AddDefaultCharset utf-8

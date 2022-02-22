@@ -1,0 +1,12 @@
+Модуль: Мои гости
+Версия: 1
+Автор: Merin
+Аська: 7950048
+
+
+Это код вставляем в личный кабинет пользователей /sys/inc/umenu.php
+
+Код вставляем в удобное для вас место!
+
+$guest=mysql_result(mysql_query("SELECT COUNT(*) FROM `my_guest` WHERE `id_user` = '".$user['id']."' AND `new` = '1'"),0);
+echo "<a href='/my_guest.php'>Мои гости</a> (".$guest.") [<a href='/newid.php'>невидимка</a>]<br />\n";
