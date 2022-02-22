@@ -1,2 +1,0 @@
-ALTER TABLE `forum_t` ADD `opros` VARCHAR( 3000 ) NOT NULL COMMENT 'Текст опроса и вариантов ответов в json формате',
-ADD `otvet` VARCHAR( 3000 ) NOT NULL COMMENT 'Результаты ответов + кто голосовал в json формате'

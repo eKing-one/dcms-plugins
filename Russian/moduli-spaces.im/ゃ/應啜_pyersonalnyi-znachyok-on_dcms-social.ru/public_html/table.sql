@@ -1,1 +1,0 @@
-ALTER TABLE `user` ADD `on_i` INT( 11 ) NOT NULL

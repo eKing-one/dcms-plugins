@@ -1,1 +1,0 @@
-ALTER TABLE  `bot` ADD  `vidnokont` INT( 255 ) NOT NULL DEFAULT  '1'

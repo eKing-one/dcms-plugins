@@ -1,5 +1,0 @@
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteRule ^files_get/download/c([0-9]*)/d([0-9]*)/f([0-9]*)/(.*).(.*) index.php?act=files&id=$1&dir=$2&file=$3&name=$4&ras=$5&download_file [L,QSA]
-RewriteRule ^([0-9]*)/ index.php?act=comm&id=$1 [L,QSA]
-</IfModule>

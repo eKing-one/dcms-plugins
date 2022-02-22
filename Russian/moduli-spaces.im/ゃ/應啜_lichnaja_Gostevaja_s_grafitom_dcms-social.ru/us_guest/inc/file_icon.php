@@ -1,1 +1,0 @@
-<img src="/user/us_guest/images/<? echo (strtolower($file['ras'])=='jar'?$file['id'].'.png':strtolower($file['icon']))?>" alt="" height="16" width="16">

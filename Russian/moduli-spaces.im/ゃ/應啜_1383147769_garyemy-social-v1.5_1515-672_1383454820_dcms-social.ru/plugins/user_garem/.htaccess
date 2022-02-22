@@ -1,8 +1,0 @@
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-   RewriteRule ^id-([0-9]*)/?$ ?id=$1 [L,QSA]
-   RewriteRule ^top/?$ ?act=top [L,QSA]
-   RewriteRule ^exit/?$ ?act=exit [L,QSA]
-   RewriteRule ^zapret/?$ zapret.php [L,QSA]
-   RewriteRule ^id-([0-9]*)/kupit/?$ ?act=kupit&id=$1 [L,QSA]
-</IfModule>
