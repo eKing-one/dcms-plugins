@@ -1,0 +1,80 @@
+<?php
+
+
+if($ank['exp']<=150)$level=0;
+elseif($ank['exp']>=151 && $ank['exp']<=300)$level=1;
+elseif($ank['exp']>=301 && $ank['exp']<=800)$level=2;
+elseif($ank['exp']>=801 && $ank['exp']<=1300)$level=3;
+elseif($ank['exp']>=1301 && $ank['exp']<=2000)$level=4;
+elseif($ank['exp']>=2001 && $ank['exp']<=3000)$level=5;
+elseif($ank['exp']>=3001 && $ank['exp']<=4500)$level=6;
+elseif($ank['exp']>=4501 && $ank['exp']<=6000)$level=7;
+elseif($ank['exp']>=6001 && $ank['exp']<=9000)$level=8;
+elseif($ank['exp']>=9001 && $ank['exp']<=12000)$level=9;
+elseif($ank['exp']>=12001 && $ank['exp']<=16000)$level=10;
+elseif($ank['exp']>=16001 && $ank['exp']<=20000)$level=11;
+elseif($ank['exp']>=20001 && $ank['exp']<=25000)$level=12;
+elseif($ank['exp']>=25001 && $ank['exp']<=30000)$level=13;
+elseif($ank['exp']>=30001 && $ank['exp']<=35000)$level=14;
+elseif($ank['exp']>=35001 && $ank['exp']<=40000)$level=15;
+elseif($ank['exp']>=40001 && $ank['exp']<=50000)$level=16;
+elseif($ank['exp']>=50001 && $ank['exp']<=60000)$level=17;
+elseif($ank['exp']>=60001 && $ank['exp']<=70000)$level=18;
+elseif($ank['exp']>=70001 && $ank['exp']<=85000)$level=19;
+elseif($ank['exp']>=85001 && $ank['exp']<=90000)$level=20;
+elseif($ank['exp']>=90001 && $ank['exp']<=105000)$level=21;
+elseif($ank['exp']>=105001 && $ank['exp']<=115000)$level=22;
+elseif($ank['exp']>=115001 && $ank['exp']<=130000)$level=23;
+elseif($ank['exp']>=130001 && $ank['exp']<=155000)$level=24;
+elseif($ank['exp']>=155001 && $ank['exp']<=170000)$level=25;
+elseif($ank['exp']>=170001 && $ank['exp']<=190000)$level=26;
+elseif($ank['exp']>=190001 && $ank['exp']<=210000)$level=27;
+elseif($ank['exp']>=210001 && $ank['exp']<=230000)$level=28;
+elseif($ank['exp']>=230001 && $ank['exp']<=250000)$level=29;
+elseif($ank['exp']>=250001 && $ank['exp']<=270000)$level=30;
+elseif($ank['exp']>=270001 && $ank['exp']<=290000)$level=31;
+elseif($ank['exp']>=290001 && $ank['exp']<=320000)$level=32;
+elseif($ank['exp']>=320001 && $ank['exp']<=340000)$level=33;
+elseif($ank['exp']>=340001 && $ank['exp']<=360000)$level=34;
+elseif($ank['exp']>=360001 && $ank['exp']<=400000)$level=35;
+elseif($ank['exp']>=400001 && $ank['exp']<=450000)$level=36;
+elseif($ank['exp']>=450001 && $ank['exp']<=500000)$level=37;
+elseif($ank['exp']>=500001 && $ank['exp']<=550000)$level=38;
+elseif($ank['exp']>=550001 && $ank['exp']<=600000)$level=39;
+elseif($ank['exp']>=600001 && $ank['exp']<=650000)$level=40;
+elseif($ank['exp']>=650001 && $ank['exp']<=700000)$level=41;
+elseif($ank['exp']>=700001 && $ank['exp']<=750000)$level=42;
+elseif($ank['exp']>=750001 && $ank['exp']<=800000)$level=43;
+elseif($ank['exp']>=800001 && $ank['exp']<=850000)$level=44;
+elseif($ank['exp']>=850001 && $ank['exp']<=950000)$level=45;
+elseif($ank['exp']>=950001 && $ank['exp']<=1000000)$level=46;
+elseif($ank['exp']>=1000001 && $ank['exp']<=1100000)$level=47;
+elseif($ank['exp']>=1100001 && $ank['exp']<=1200000)$level=48;
+elseif($ank['exp']>=1200001 && $ank['exp']<=1300000)$level=49;
+elseif($ank['exp']>=1300001 && $ank['exp']<1500000)$level=50;
+elseif($ank['exp']>=1500001 && $ank['exp']<=1700000)$level=51;
+elseif($ank['exp']>=1700001 && $ank['exp']<=1900000)$level=52;
+elseif($ank['exp']>=1900001 && $ank['exp']<=2100000)$level=53;
+elseif($ank['exp']>=2100001 && $ank['exp']<=2300000)$level=55;
+elseif($ank['exp']>=2300001 && $ank['exp']<=2600000)$level=56;
+elseif($ank['exp']>=2600001 && $ank['exp']<=2900000)$level=57;
+elseif($ank['exp']>=2900001 && $ank['exp']<=3100000)$level=58;
+elseif($ank['exp']>=3100001 && $ank['exp']<=3500000)$level=59;
+elseif($ank['exp']>=3500001 && $ank['exp']<=3800000)$level=60;
+elseif($ank['exp']>=3800001 && $ank['exp']<=4000000)$level=61;
+elseif($ank['exp']>=4000001 && $ank['exp']<=4400000)$level=62;
+elseif($ank['exp']>=4400001 && $ank['exp']<=4800000)$level=63;
+elseif($ank['exp']>=4800001 && $ank['exp']<=5000000)$level=64;
+elseif($ank['exp']>=5000001 && $ank['exp']<=5400000)$level=65;
+elseif($ank['exp']>=5400001 && $ank['exp']<=5800000)$level=66;
+elseif($ank['exp']>=5800001 && $ank['exp']<=6200000)$level=67;
+elseif($ank['exp']>=6200001 && $ank['exp']<=6500000)$level=68;
+elseif($ank['exp']>=6500001 && $ank['exp']<=7000000)$level=69;
+elseif($ank['exp']>=7000001 && $ank['exp']<=8000000)$level=70;
+elseif($ank['exp']>=8000001 && $ank['exp']<=9000000)$level=71;
+elseif($ank['exp']>=9000001 && $ank['exp']<=10000000)$level=72;
+elseif($ank['exp']>=10000001 && $ank['exp']<=11000000)$level=73;
+
+
+
+?>

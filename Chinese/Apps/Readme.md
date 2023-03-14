@@ -2,7 +2,7 @@
 ICQ：587863132
 网址：http://phpsu.ru
 
-DCMS-Social 的游戏部分。
+DCMS-Social 的游戏中心。
 
 安装：
 1）解压至根目录

@@ -1,0 +1,13 @@
+RewriteEngine On
+RewriteRule ^shop/plant/([0-9]*) shop.php?id=$1 [L,QSA]
+RewriteRule ^shop/ shop.php [L,QSA]
+RewriteRule ^storage/ storage.php [L,QSA]
+RewriteRule ^fermers/ fermers.php [L,QSA]
+RewriteRule ^garden/ my.php [L,QSA]
+RewriteRule ^gr/([0-9]*) gr.php?id=$1 [L,QSA]
+RewriteRule ^welcome$ welcome.php [L,QSA]
+RewriteRule ^ambar$ ambar.php [L,QSA]
+RewriteRule ^sklad$ sklad.php [L,QSA]
+RewriteRule ^dining$ dining.php [L,QSA]
+RewriteRule ^exchanger$ exchanger.php [L,QSA]
+RewriteRule ^fermers/vor$ fermers_gr.php [L,QSA]
